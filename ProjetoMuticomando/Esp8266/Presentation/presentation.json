@@ -1,0 +1,35 @@
+{
+    "length": 5,
+    "act1": {
+        "moviment": "Motor",
+        "speed": [500, 500],
+        "time": 1000 
+    },
+    "act2": {
+        "moviment": "Led",
+        "leds": "10101010",
+        "time": 3000,
+        "repeat": 2
+    },
+    "act3": {
+        "moviment": "Led",
+        "leds": "11111111",
+        "time": 2000,
+        "repeat": 1
+    },
+    "act4": {
+        "queue": ["Motor", "Led", "Motor"],
+        "details": [
+            {"speed": [500, 500], "time": 1000},
+            {"leds": "01010101", "repeat": 2, "time": 1000},
+            {"speed": [-500, -500], "time": 1000}
+        ]
+    },
+    "act5": {
+        "moviments": ["Led", "Motor"],
+        "details": [
+            {"leds": "11111111", "time": 2000, "repeat": 3},
+            {"speed": [500, 500], "time": 5000}
+        ]
+    }
+}

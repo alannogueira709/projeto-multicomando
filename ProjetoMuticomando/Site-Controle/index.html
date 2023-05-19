@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" width='device-width', initial-scale=1.0">
+    <title> Baile de Robôs </title>
+
+    <!-- <link rel="stylesheet" href="./reset.css"> -->
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <style>
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed, 
+        figure, figcaption, footer, header, hgroup, 
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure, 
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+    </style>
+    <style>
+        html {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(180deg, #000000 14.06%, rgba(15, 15, 15, 0.38) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        body {
+            background-color: white;
+            border-radius: 1rem;
+            height: 600px;
+            width: 412px;
+        }
+
+        .cabecalho {
+            height: 100px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            height: 60px;
+            width: 60px;
+            border: gainsboro 0.5px solid;
+            border-radius: 50%;
+            margin-right: .3rem;
+        }
+
+        .logo img {
+            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: inherit;
+        }
+
+        .titulo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .modalidade, 
+        .apresentacao,
+        .piscar,
+        .musicas {
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .apresentacao {
+            display: none;
+            padding: .5rem 0rem;
+        }
+
+        .modalidade label,
+        .content-apresentacao label,
+        .piscar label,
+        .musicas label {
+            margin-left: 2rem;
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        .modalidade input,
+        .musicas input {
+            width: 200px;
+            margin-left: .5rem;
+        }
+
+        .content-apresentacao input {
+            width: 50px;
+            margin-left: .5rem;
+        }
+
+        .piscar input {
+            margin-top: .3rem;
+        }
+
+        .robos, .leds {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 0rem;
+        }
+
+        .robo {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin: 0 .5rem;
+        }
+
+        .leds input {
+            display: none;
+        }
+
+
+        .led {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: darkgrey;
+            margin: 0 0.5rem;
+        }
+
+        #led1:checked ~ label[for="led1"]{
+            background-color: blue;
+        }
+
+        #led2:checked ~ label[for="led2"]{
+            background-color: blue;
+        }
+
+        #led3:checked ~ label[for="led3"]{
+            background-color: blue;
+        }
+
+        #led4:checked ~ label[for="led4"]{
+            background-color: blue;
+        }
+
+        #led5:checked ~ label[for="led5"]{
+            background-color: blue;
+        }
+
+        #led6:checked ~ label[for="led6"]{
+            background-color: blue;
+        }
+
+        #led7:checked ~ label[for="led7"]{
+            background-color: blue;
+        }
+        #led8:checked ~ label[for="led8"]{
+            background-color: blue;
+        }
+
+        .joystick {
+            width: 100%;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .joystick input {
+            height: 40px;
+            width: 40px;
+            border: black 0.5px solid;
+            border-radius: .5rem;
+        }
+
+        .joystick input:active {
+            background-color: darkgray;
+        }
+
+        .controle-laterais input:first-child {
+            margin-right: 2.5rem;
+        }
+
+        .display-none {
+            display: none;
+        }
+
+        .robo-online {
+            background-color: green;
+        }
+
+        .robo-offline {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="cabecalho">
+        <div class="logo">
+            <img src="./logo.jpg" alt="">
+        </div>
+        <div class="titulo">
+            <p>10Dimensões</p>
+        </div>
+    </div>
+    <div class="modalidade">
+        <label for="modalidade">Modalidade: </label>
+        <input list="modalidades" id="modalidade">
+        <datalist id="modalidades">
+            <option value="Apresentação">
+            <option value="Controle Remoto">
+        </datalist>
+    </div>
+    <div class="content-apresentacao display-none">
+        <label for="apresentacao">Apresentação:</label>
+        <input type="number" min=0 max=5 id="apresentacao">
+    </div>
+    <div class="robos">
+        <div class="robo robo-offline"></div>
+        <div class="robo robo-offline"></div>
+        <div class="robo robo-offline"></div>
+        <div class="robo robo-offline"></div>
+        <div class="robo robo-offline"></div>
+    </div>
+    <div class="content-controle display-none">
+        <div class="musicas">
+            <label for="musica">Músicas: </label>
+        <input list="musicas" id="musica">
+        <datalist id="musicas">
+            <option value="Música 1">
+                <option value="Música 2">
+                </datalist>
+            </div>
+            <div class="joystick">
+                <div class="controle-cima">
+                    <input type="button" id="button-cima">
+                </div>
+                <div class="controle-laterais">
+                    <input type="button" id="button-esquerda">
+                    <input type="button" id="button-direita">
+                </div>
+                <div class="controle-baixo">
+                    <input type="button" id="button-baixo">
+                </div>
+            </div>
+            <div class="leds">
+                <input type="checkbox" id="led1" class="led-input">
+                <label class="led" for="led1"></label>
+                
+                <input type="checkbox" id="led2" class="led-input">
+                <label class="led" for="led2"></label>
+                
+                <input type="checkbox" id="led3" class="led-input">
+                <label class="led" for="led3"></label>
+                
+                <input type="checkbox" id="led4" class="led-input">
+                <label class="led" for="led4"></label>
+                
+                <input type="checkbox" id="led5" class="led-input">
+                <label class="led" for="led5"></label>
+                
+                <input type="checkbox" id="led6" class="led-input">
+                <label class="led" for="led6"></label>
+                
+                <input type="checkbox" id="led7" class="led-input">
+                <label class="led" for="led7"></label>
+                
+                <input type="checkbox" id="led8" class="led-input">
+                <label class="led" for="led8"></label>
+            </div>
+            <div class="piscar">
+                <label for="piscar">Piscar</label>
+                <input type="checkbox" name="" id="piscar">
+            </div>
+        </div>
+    </body>
+    <script>
+        var contentApresentacao = document.getElementsByClassName("content-apresentacao")[0];
+        var contentControle = document.getElementsByClassName("content-controle")[0];
+
+        var inputModalidade = document.getElementById("modalidade");
+        var url_modo = "http://localhost:80/modo"
+        var url_atos = "http://localhost:80/acts"
+        var url_apresentacao = "http://localhost:8000/presentation"
+
+
+        inputModalidade.addEventListener("change", event => {
+            var value = event.target.value;
+            
+            if (value == "Apresentação") {
+                if(contentApresentacao.classList.contains("display-none")) {
+                    contentApresentacao.classList.remove("display-none");
+                }
+                if(!contentControle.classList.contains("display-none")) {
+                    contentControle.classList.add("display-none");
+                }
+            } else {
+                if(!contentApresentacao.classList.contains("display-none")) {
+                    contentApresentacao.classList.add("display-none");
+                }
+                if(contentControle.classList.contains("display-none")) {
+                    contentControle.classList.remove("display-none");
+                }
+            }
+            var body = JSON.stringify({'modo':value})
+            console.log(body)
+            fetch(url_modo, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: body
+            })
+        })
+
+
+        var numRobos = 3;
+        var elementsRobos = document.getElementsByClassName("robo");
+
+        Array.from(elementsRobos).forEach((value, index) => {
+            index += 1;
+            if(index <= numRobos) {
+                if(value.classList.contains("robo-offline")) {
+                    value.classList.remove("robo-offline")
+                }
+                value.classList.add("robo-online");
+            } else {
+                if(value.classList.contains("robo-online")) {
+                    value.classList.remove("robo-online")
+                }
+                value.classList.add("robo-offline")
+            }
+        })
+
+        var apresentacaoInput = document.getElementById("apresentacao");
+        var numApresentacao;
+
+        apresentacaoInput.addEventListener('change', event => {
+            numApresentacao = event.target.value;
+
+            fetch(url_apresentacao, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'apresentacao':numApresentacao})
+            })
+        });
+
+        var musicaInput = document.getElementById("musica");
+        var musicaNome;
+        var piscarCheckbox = document.getElementById("piscar");
+        var piscar;
+
+        musicaInput.addEventListener('change', event => {
+            musicaNome = event.target.value;
+
+            fetch(url_atos, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'musica':musicaNome})
+            })
+        })
+
+        piscarCheckbox.addEventListener('change', event => {
+            piscar = event.target.checked
+
+            fetch(url_atos, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'piscar': piscar})
+            })
+        })
+
+        var joystickCima = document.getElementById("button-cima");
+        var joystickEsquerda = document.getElementById("button-esquerda");
+        var joystickDireita = document.getElementById("button-direita");
+        var joystickBaixo = document.getElementById("button-baixo");
+
+        joystickCima.onmousedown = () => {
+            fetch(url_atos, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'movimento': "frente"})
+            })
+        }
+
+        joystickCima.onmouseup = () => {
+            fetch(url_atos, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'movimento': "parar"})
+            })
+        }
+
+        joystickEsquerda.onmousedown = () => {
+            fetch(url_atos, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'movimento': "esquerda"})
+            })
+        }
+
+        joystickEsquerda.onmouseup = () => {
+            fetch(url_atos, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'movimento': "parar"})
+            })
+        }
+
+        joystickDireita.onmousedown = () => {
+            fetch(url_atos, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'movimento': "direita"})
+            })
+        }
+
+        joystickDireita.onmouseup = () => {
+            fetch(url_atos, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'movimento': "parar"})
+            })
+        }
+
+        joystickBaixo.onmousedown = () => {
+            fetch(url_atos, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'movimento': "tras"})
+            })
+        }
+
+        joystickBaixo.onmouseup = () => {
+            fetch(url_atos, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'movimento': "parar"})
+            })
+        }
+
+        var ledInputs = document.getElementsByClassName("led-input");
+        var ledByte = [0, 0, 0, 0, 0, 0, 0, 0];
+        var ledFinal;
+
+        Array.from(ledInputs).forEach((led, index) => {
+            led.addEventListener('change', event => {
+                var ledState = event.target.checked ? 1 : 0;
+
+                ledByte[index] = ledState
+                ledFinal = ledByte.join().replaceAll(",", "");
+                fetch(url_atos, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({'leds': ledFinal})
+                })
+            })
+        })
+    </script>
+</html>

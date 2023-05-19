@@ -1,0 +1,176 @@
+html {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(180deg, #000000 14.06%, rgba(15, 15, 15, 0.38) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+body {
+    background-color: white;
+    border-radius: 1rem;
+    height: 600px;
+    width: 412px;
+}
+
+.cabecalho {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    height: 60px;
+    width: 60px;
+    border: gainsboro 0.5px solid;
+    border-radius: 50%;
+    margin-right: .3rem;
+}
+
+.logo img {
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: inherit;
+}
+
+.titulo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.modalidade, 
+.apresentacao,
+.piscar,
+.musicas {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.apresentacao {
+    display: none;
+    padding: .5rem 0rem;
+}
+
+.modalidade label,
+.content-apresentacao label,
+.piscar label,
+.musicas label {
+    margin-left: 2rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.modalidade input,
+.musicas input {
+    width: 200px;
+    margin-left: .5rem;
+}
+
+.content-apresentacao input {
+    width: 50px;
+    margin-left: .5rem;
+}
+
+.piscar input {
+    margin-top: .3rem;
+}
+
+.robos, .leds {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0rem;
+}
+
+.robo {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 0 .5rem;
+}
+
+.leds input {
+    display: none;
+}
+
+
+.led {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: darkgrey;
+    margin: 0 0.5rem;
+}
+
+#led1:checked ~ label[for="led1"]{
+    background-color: blue;
+}
+
+#led2:checked ~ label[for="led2"]{
+    background-color: blue;
+}
+
+#led3:checked ~ label[for="led3"]{
+    background-color: blue;
+}
+
+#led4:checked ~ label[for="led4"]{
+    background-color: blue;
+}
+
+#led5:checked ~ label[for="led5"]{
+    background-color: blue;
+}
+
+#led6:checked ~ label[for="led6"]{
+    background-color: blue;
+}
+
+#led7:checked ~ label[for="led7"]{
+    background-color: blue;
+}
+#led8:checked ~ label[for="led8"]{
+    background-color: blue;
+}
+
+.joystick {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.joystick input {
+    height: 40px;
+    width: 40px;
+    border: black 0.5px solid;
+    border-radius: .5rem;
+}
+
+.joystick input:active {
+    background-color: darkgray;
+}
+
+.controle-laterais input:first-child {
+    margin-right: 2.5rem;
+}
+
+.display-none {
+    display: none;
+}
+
+.robo-online {
+    background-color: green;
+}
+
+.robo-offline {
+    background-color: red;
+}
